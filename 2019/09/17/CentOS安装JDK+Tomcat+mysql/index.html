@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Linux - 世界上另外一个小刘</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="世界上另外一个小刘"><meta name="msapplication-TileImage" content="https://cdn.jsdelivr.net/gh/removeif/removeif-demo@latest/img/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="世界上另外一个小刘"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta description="学习CentOS linux的一些基础技能 先决条件:  VMware CentOS6.5 Xshell Filezila  步骤:一，安装JDK1.81，把压缩包上传到服务器&amp;#x2F;usr&amp;#x2F;local&amp;#x2F;tmp这里目录下面（我这里是提前新建好的这里目录的文件夹）​      使用Filezile软件上传文件  2，解压jdk压缩包(这个过程代码很多没截全图) #tar zxvf 你的jdk文件名   3"><meta property="og:type" content="blog"><meta property="og:title" content="世界上另外一个小刘"><meta property="og:url" content="https://vilboys.github.io/"><meta property="og:site_name" content="世界上另外一个小刘"><meta property="og:description" content="学习CentOS linux的一些基础技能 先决条件:  VMware CentOS6.5 Xshell Filezila  步骤:一，安装JDK1.81，把压缩包上传到服务器&amp;#x2F;usr&amp;#x2F;local&amp;#x2F;tmp这里目录下面（我这里是提前新建好的这里目录的文件夹）​      使用Filezile软件上传文件  2，解压jdk压缩包(这个过程代码很多没截全图) #tar zxvf 你的jdk文件名   3"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/VIlboys/blog_img/icon_img/avatar.jpg"><meta property="article:published_time" content="2019-09-17T13:43:00.000Z"><meta property="article:modified_time" content="2021-01-17T10:36:41.083Z"><meta property="article:author" content="removeif"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://cdn.jsdelivr.net/gh/VIlboys/blog_img/icon_img/avatar.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://github.com/VIlboys/VIlboys.github.io.git/2019/09/17/CentOS%E5%AE%89%E8%A3%85JDK+Tomcat+mysql/"},"headline":"世界上另外一个小刘","image":["https://github.com/images/Linux/01.png","https://github.com/images/Linux/02.png","https://github.com/images/Linux/03.png","https://github.com/images/Linux/04.png","https://github.com/images/Linux/05.png","https://github.com/images/Linux/06.png","https://github.com/images/Linux/07.png","https://github.com/images/Linux/08.png","https://github.com/images/Linux/09.png","https://github.com/images/Linux/10.png","https://github.com/images/Linux/11.png","https://github.com/images/Linux/12.png","https://github.com/images/Linux/13.png","https://github.com/images/Linux/14.png","https://github.com/images/Linux/16.png","https://github.com/images/Linux/17.png","https://github.com/images/Linux/18.png","https://github.com/images/Linux/19.png","https://github.com/images/Linux/20.png","https://github.com/images/Linux/21.png","https://github.com/images/Linux/22.png"],"datePublished":"2019-09-17T13:43:00.000Z","dateModified":"2021-01-17T10:36:41.083Z","author":{"@type":"Person","name":"世界上另外一个小刘"},"description":"学习CentOS linux的一些基础技能 先决条件:  VMware CentOS6.5 Xshell Filezila  步骤:一，安装JDK1.81，把压缩包上传到服务器&#x2F;usr&#x2F;local&#x2F;tmp这里目录下面（我这里是提前新建好的这里目录的文件夹）​      使用Filezile软件上传文件  2，解压jdk压缩包(这个过程代码很多没截全图) #tar zxvf 你的jdk文件名   3"}</script><link rel="canonical" href="https://github.com/VIlboys/VIlboys.github.io.git/2019/09/17/CentOS%E5%AE%89%E8%A3%85JDK+Tomcat+mysql/"><link rel="icon" href="https://cdn.jsdelivr.net/gh/removeif/removeif-demo@latest/img/favicon.png"><meta name="referrer" content="no-referrer-when-downgrade"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css?family=Ubuntu:400,600|Source+Code+Pro|Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Microsoft YaHei:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;amp;subset=latin,latin-ext|Inconsolata|Itim|Lobster.css"><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="/js/globalUtils.js"></script><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><link rel="stylesheet" href="/live2d/waifu.css"><script type="text/javascript" async src="/live2d/autoload.js"></script><meta name="generator" content="Hexo 5.3.0"></head><body class="is-3-column has-navbar-fixed-top"><nav class="navbar navbar-main is-fixed-top"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="https://cdn.jsdelivr.net/gh/VIlboys/blog_img/icon_img/logo-s.png" alt="世界上另外一个小刘" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/media">影音</a><a class="navbar-item" href="/album">相册</a><a class="navbar-item" href="/friend">友链</a><a class="navbar-item" href="/self-talking">碎碎念</a><a class="navbar-item" href="/message">留言</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Join Gitter" href="https://gitter.im/hexo-theme-amazing/community"><i class="fab fa-gitter"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/VIlboys"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a></div></div></div></nav><script type="text/javascript" src="/js/theme-setting.js"></script><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><!--!--><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><i class="far fa-calendar-plus"> </i>2019-09-17  <a class="commentCountImg" href="/2019/09/17/CentOS%E5%AE%89%E8%A3%85JDK+Tomcat+mysql/#comment-container"><span class="display-none-class">e36ce5a857e284a4a7ad05a921641d3e</span><i class="far fa-comment-dots"></i> <span class="commentCount" id="e36ce5a857e284a4a7ad05a921641d3e">99+</span>  </a><span class="level-item"><i class="far fa-clock"> </i>11 分钟  <i class="fas fa-pencil-alt"> </i>1.6 k</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">Linux</h1><div class="content"><p>学习CentOS linux的一些基础技能</p>
+<p>先决条件:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.vmware.com/cn.html">VMware</a></li>
+<li><a target="_blank" rel="noopener" href="https://wiki.centos.org/Download">CentOS6.5</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.netsarang.com/en/xshell/">Xshell</a></li>
+<li><a target="_blank" rel="noopener" href="https://filezilla-project.org/download.php?show_all=1">Filezila</a></li>
+</ul>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤:"></a>步骤:</h2><h3 id="一，安装JDK1-8"><a href="#一，安装JDK1-8" class="headerlink" title="一，安装JDK1.8"></a>一，安装JDK1.8</h3><h5 id="1，把压缩包上传到服务器-usr-local-tmp这里目录下面（我这里是提前新建好的这里目录的文件夹）"><a href="#1，把压缩包上传到服务器-usr-local-tmp这里目录下面（我这里是提前新建好的这里目录的文件夹）" class="headerlink" title="1，把压缩包上传到服务器/usr/local/tmp这里目录下面（我这里是提前新建好的这里目录的文件夹）"></a><font size="4">1，把压缩包上传到服务器<font color="red"><strong>/usr/local/tmp</strong></font>这里目录下面（我这里是提前新建好的这里目录的文件夹）</font><br></h5><p>​      使用Filezile软件上传文件</p>
+<p><img src="/images/Linux/01.png" alt="图1"></p>
+<h5 id="2，解压jdk压缩包-这个过程代码很多没截全图"><a href="#2，解压jdk压缩包-这个过程代码很多没截全图" class="headerlink" title="2，解压jdk压缩包(这个过程代码很多没截全图)"></a>2，解压jdk压缩包(这个过程代码很多没截全图)</h5><blockquote>
+<p><font color="red">#tar zxvf 你的jdk文件名</font></p>
+</blockquote>
+<p><img src="/images/Linux/02.png" alt="图2"></p>
+<h5 id="3，把解压后文件复制到-usr-local-jdk8"><a href="#3，把解压后文件复制到-usr-local-jdk8" class="headerlink" title="3，把解压后文件复制到/usr/local/jdk8"></a>3，把解压后文件复制到<font color="red"><strong>/usr/local/jdk8</strong></font></h5><blockquote>
+<p><font color="red">cp -r jdk1.8.0_221 /usr/local/jdk8</font></p>
+<p>使用cd..向上级跳转</p>
+<p>然后输入ls查看有没有成功</p>
+</blockquote>
+<p><img src="/images/Linux/03.png" alt="图3"></p>
+<h5 id="4，配置环境变量，执行命令"><a href="#4，配置环境变量，执行命令" class="headerlink" title="4，配置环境变量，执行命令"></a>4，配置环境变量，执行命令</h5><blockquote>
+<p><font color="red">#vim /etc/profile</font></p>
+</blockquote>
+<h5 id="5，修改文件中内容"><a href="#5，修改文件中内容" class="headerlink" title="5，修改文件中内容"></a>5，修改文件中内容</h5><ol>
+<li>进入文件夹后按下i或者insert键既可修改</li>
+<li>先把#export PATH USER LOGNAME MAIL HOSTNAME HISTSIZE HISTCONTROL前面打上#注释掉</li>
+<li>后面添加我们的配置</li>
+<li><strong>分隔符使用的是冒号:而不是分号；</strong></li>
+<li><strong>$变量名表示引用</strong></li>
+<li><strong>export 添加或修改变量</strong></li>
+</ol>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#export PATH USER LOGNAME MAIL HOSTNAME HISTSIZE HISTCONTROL</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">JAVA_HOME</span>=/usr/local/jdk7</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$JAVA_HOME</span>/bin:$PATH</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">CLASSPATH</span>=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br></pre></td></tr></table></figure>
+<h5 id="6，解析文件（或重启系统）"><a href="#6，解析文件（或重启系统）" class="headerlink" title="6，解析文件（或重启系统）"></a>6，解析文件（或重启系统）</h5><blockquote>
+<p>#source /etc/profile</p>
+</blockquote>
+<h5 id="7，验证配置是否成功"><a href="#7，验证配置是否成功" class="headerlink" title="7，验证配置是否成功"></a>7，验证配置是否成功</h5><blockquote>
+<p>#java -version</p>
+</blockquote>
+<p>这里可以看到没有任何问题，显示了jdk版本号</p>
+<p><img src="/images/Linux/04.png" alt="图4"></p>
+<h5 id="8，可以编写一个小栗子测试"><a href="#8，可以编写一个小栗子测试" class="headerlink" title="8，可以编写一个小栗子测试"></a>8，可以编写一个小栗子测试</h5><blockquote>
+<h5 id="vim-Demo-java"><a href="#vim-Demo-java" class="headerlink" title="#vim Demo.java"></a>#vim Demo.java</h5></blockquote>
+<p>写入以下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">System.out.println(<span class="string">&quot;hello Word&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>按下ese结束输入然后按下：再输入wq保存并退出</p>
+<p><img src="/images/Linux/05.png" alt="图5"></p>
+<p>运行命令:</p>
+<blockquote>
+<p>javac Demo.java</p>
+</blockquote>
+<p>然后输入:</p>
+<blockquote>
+<p>java Demo</p>
+</blockquote>
+<p>运行结果:没有问题</p>
+<p><img src="/images/Linux/06.png" alt="图6"></p>
+<br>
+
+<h3 id="二，安装Tomcat"><a href="#二，安装Tomcat" class="headerlink" title="二，安装Tomcat"></a>二，安装Tomcat</h3><h5 id="1，把tomcat压缩包上传到服务器上"><a href="#1，把tomcat压缩包上传到服务器上" class="headerlink" title="1，把tomcat压缩包上传到服务器上"></a>1，把tomcat压缩包上传到服务器上</h5><p><img src="/images/Linux/07.png" alt="图6"></p>
+<h5 id="2，解压文件"><a href="#2，解压文件" class="headerlink" title="2，解压文件"></a>2，解压文件</h5><blockquote>
+<h1 id="tar-zxvf-apache-tomcat-8-5-45-tar-gz"><a href="#tar-zxvf-apache-tomcat-8-5-45-tar-gz" class="headerlink" title="tar zxvf apache-tomcat-8.5.45.tar.gz"></a>tar zxvf apache-tomcat-8.5.45.tar.gz</h1></blockquote>
+<p><img src="/images/Linux/08.png" alt="图6"></p>
+<h5 id="3，解压后的文件夹复制到-usr-local-tomcat下"><a href="#3，解压后的文件夹复制到-usr-local-tomcat下" class="headerlink" title="3，解压后的文件夹复制到/usr/local/tomcat下"></a>3，解压后的文件夹复制到/usr/local/tomcat下</h5><blockquote>
+<p>#cp -r apache-tomcat-8.5.45 ../tomcat</p>
+</blockquote>
+<p><img src="/images/Linux/09.png" alt="图6"></p>
+<h5 id="4，配置环境变量"><a href="#4，配置环境变量" class="headerlink" title="4，配置环境变量"></a>4，配置环境变量</h5><blockquote>
+<p>#vim/etc/profile</p>
+</blockquote>
+<p>添加以下内容</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">export</span> <span class="string">TOMCAT_HOME=/usr/local/tomcat</span></span><br><span class="line"><span class="attr">export</span> <span class="string">CATALINA_HOME=/usr/local/tomcat</span></span><br></pre></td></tr></table></figure>
+<p>配置之后呢执行source  /etc/profile，然后可以进入tomcat文件夹下试试运行</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./<span class="selector-tag">startup</span><span class="selector-class">.sh</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/Linux/10.png" alt="图6"></p>
+<p>然后打开我们的本地浏览器看能不能；访问地址：是你的虚拟机上IP地址加上8080端口如下这样</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">192<span class="selector-class">.xx</span><span class="selector-class">.xx</span>.130<span class="selector-pseudo">:8080</span></span><br></pre></td></tr></table></figure>
+<p>你可能会看到访问不到这个tomcat的页面，刷新也不行；原因是因为虚拟机只放行22端口，其他的端口都被我们的防火墙给拦截了所以访问不到；</p>
+<p><strong>4.1解决的的办法：放行8080端口</strong></p>
+<p>进入到系统配置文件</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim <span class="regexp">/etc/</span>sysconfig/iptables</span><br></pre></td></tr></table></figure>
+<p>我们只需要在后面添加一句话这句话的意思是放行8080端口</p>
+<ul>
+<li>如果想放行多个端口可以这样写:8080:9000</li>
+</ul>
+<p><img src="/images/Linux/11.png" alt="图6"></p>
+<p>配置之后呢还需要重启一下服务才会生效，不然不起作用</p>
+<p>进入到sysconfig文件</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#cd /etc/sysconfig</span></span><br></pre></td></tr></table></figure>
+<p>执行重启服务</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#service iptables restart</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/Linux/12.png" alt="图6"></p>
+<p>5，启动tomcat，进入到tomcat/bin文件</p>
+<ol>
+<li>先执行命令：**./shutdown.sh**关闭tomcat</li>
+</ol>
+<p>5.1 启动有两种启动方式</p>
+<ol>
+<li><p>直接启动： </p>
+</li>
+<li><pre><code>./startup.sh
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">3</span>. 启动并动态打印启动信息：</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>. ```</span><br><span class="line">   #./startup.sh &amp; tailf ../logs/catalina.out</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ol>
+<h4 id="查看页面"><a href="#查看页面" class="headerlink" title="查看页面:"></a><strong>查看页面:</strong></h4><p><img src="/images/Linux/13.png" alt="图6"></p>
+<br>
+
+<h3 id="三，安装mysql"><a href="#三，安装mysql" class="headerlink" title="三，安装mysql"></a>三，安装mysql</h3><h5 id="1，还是把文件上传"><a href="#1，还是把文件上传" class="headerlink" title="1，还是把文件上传"></a>1，还是把文件上传</h5><p><img src="/images/Linux/14.png" alt="图6"></p>
+<h5 id="2，然后解压文件"><a href="#2，然后解压文件" class="headerlink" title="2，然后解压文件:"></a>2，然后解压文件:</h5><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># tar zxvf 文件名</span></span><br></pre></td></tr></table></figure>
+<h5 id="3，复制文件到-usr-local-mysql"><a href="#3，复制文件到-usr-local-mysql" class="headerlink" title="3，复制文件到/usr/local/mysql"></a>3，复制文件到/usr/local/mysql</h5><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#cp -r mysql-5.6.31-linux-glibc2.5-x86_64 ../mysql</span></span><br></pre></td></tr></table></figure>
+<h5 id="4，创建用户组和用户-是不想把root付给mysql，如果你不考虑这些事情的话就不用这么创建"><a href="#4，创建用户组和用户-是不想把root付给mysql，如果你不考虑这些事情的话就不用这么创建" class="headerlink" title="4，创建用户组和用户(是不想把root付给mysql，如果你不考虑这些事情的话就不用这么创建)"></a>4，创建用户组和用户(是不想把root付给mysql，如果你不考虑这些事情的话就不用这么创建)</h5><p>4.1添加用户组，命名为mysql</p>
+<p>命令：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">groupadd mysql</span></span><br></pre></td></tr></table></figure>
+<p>4.2 创建用户MySQL，并指定所属群组为MySQL</p>
+<p>命令：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">useradd -r -g mysql mysql</span> </span><br></pre></td></tr></table></figure>
+<p>下面的命令必需要在/usr/local/mysql中执行（后面有一个点这点需要注意）</p>
+<p>变更mysql用户组拥有操作当前文件夹的权限命令：</p>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chgrp -R mysql .</span><br></pre></td></tr></table></figure>
+<p>变更mysql用户具有操作本级目录的权限。</p>
+<p>命令：</p>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R mysql .</span><br></pre></td></tr></table></figure>
+<p>上面两个命令也可以换成下面一条命令</p>
+<p>chown -R mysql:mysql ./</p>
+<h5 id="5，判断-etc-my-cnf是否存在"><a href="#5，判断-etc-my-cnf是否存在" class="headerlink" title="5，判断/etc/my.cnf是否存在"></a>5，判断/etc/my.cnf是否存在</h5><p>命令：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ls</span> /etc/my.<span class="keyword">cnf</span></span><br></pre></td></tr></table></figure>
+<p>如果存在就删除：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm <span class="regexp">/etc/my</span>.cnf</span><br></pre></td></tr></table></figure>
+<p>初始化数据库</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.<span class="regexp">/scripts/my</span>sql_install_db  --user=mysql</span><br></pre></td></tr></table></figure>
+<h5 id="6，修改配置文件"><a href="#6，修改配置文件" class="headerlink" title="6，修改配置文件"></a>6，修改配置文件</h5><p>复制my.cnf文件：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cp</span> support-<span class="keyword">files</span>/my-default.<span class="keyword">cnf</span> /etc/my.<span class="keyword">cnf</span></span><br></pre></td></tr></table></figure>
+<p>复制启动文件:(最后的mysql是你的服务名,如果你想启动的话就必须得写 service mysql start)</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp support-files<span class="regexp">/mysql.server /</span>etc<span class="regexp">/rc.d/i</span>nit.d/mysql</span><br></pre></td></tr></table></figure>
+<p>这个时候可以启动服务：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysql <span class="keyword">start</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/Linux/16.png" alt="图16"></p>
+<p>会提示找不到这个命令，所以这里我们还得添加一个软连接；添加后得开启服务不然会报错(红色框框部分)</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s <span class="regexp">/usr/</span>local<span class="regexp">/mysql/</span>bin<span class="regexp">/mysql /u</span>sr<span class="regexp">/bin/my</span>sql</span><br></pre></td></tr></table></figure>
+<p><img src="/images/Linux/17.png" alt="图16"></p>
+<p>开启服务后输入：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">mysql -u root -p</span></span><br></pre></td></tr></table></figure>
+<p>按回车不需要输入密码就进入了Mysql</p>
+<p><img src="/images/Linux/18.png" alt="图16"></p>
+<h5 id="7，修改mysql得密码和访问权限"><a href="#7，修改mysql得密码和访问权限" class="headerlink" title="7，修改mysql得密码和访问权限"></a>7，修改mysql得密码和访问权限</h5><p>刚创建的root账户是没有密码的的，直接回车就可以进入为了修改访问权限我们修改一下root密码</p>
+<p>我们得先进入mysql这个数据库内</p>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="keyword">use</span> <span class="title">mysql</span>;</span><br></pre></td></tr></table></figure>
+<p>你可以先看下user的描述我们修改的是password这一列 </p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="keyword">desc</span> <span class="keyword">user</span>;</span><br></pre></td></tr></table></figure>
+<p>然后执行命令：</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="keyword">update</span> <span class="keyword">user</span> <span class="keyword">set</span> <span class="keyword">password</span>=<span class="keyword">password</span>(<span class="number">775741</span>) <span class="keyword">where</span> <span class="keyword">user</span>=<span class="string">&#x27;root&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>然后我们得刷新权限：（不然你得重启）</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="built_in">flush</span> privileges;</span><br></pre></td></tr></table></figure>
+<p>接着退出mysql编辑：</p>
+<p>然后在执行：(这个时候我们就有密码了)</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># mysql -u root -p</span></span><br></pre></td></tr></table></figure>
+<p>这个时候我们可以在本地windows上连接一下这个服务器的数据库;你会发现连接不上会报错</p>
+<p><img src="/images/Linux/19.png" alt="图16"></p>
+<p>因为这个3306得端口号是没有放行得，user里面也没有授权%</p>
+<p>我们可以执行以下命令权限赋予命令</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">privileges</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> root@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;775741&#x27;</span> <span class="keyword">with</span> <span class="keyword">grant</span> <span class="keyword">option</span>;</span><br></pre></td></tr></table></figure>
+<p>可以查看有没有%接着刷新权限</p>
+<p><img src="/images/Linux/20.png" alt="图16"></p>
+<p>再去放行端口3306：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim <span class="regexp">/etc/</span>sysconfig/iptables</span><br></pre></td></tr></table></figure>
+<p>添加3306端口:</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">3306</span> -j ACCEPT</span><br></pre></td></tr></table></figure>
+<p><img src="/images/Linux/21.png" alt="图16"></p>
+<p>再去本地上测试连接：</p>
+<p><img src="/images/Linux/22.png" alt="图16"></p>
+<p>就可以看到能够连接上了</p>
+<h4 id="到此完整结束；"><a href="#到此完整结束；" class="headerlink" title="到此完整结束；"></a>到此完整结束；</h4><h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料:"></a>参考资料:</h4><ol>
+<li>百老师和谷老师</li>
+<li>脑子</li>
+</ol>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Linux</p><p><a href="https://github.com/VIlboys/VIlboys.github.io.git/2019/09/17/CentOS安装JDK+Tomcat+mysql/">https://github.com/VIlboys/VIlboys.github.io.git/2019/09/17/CentOS安装JDK+Tomcat+mysql/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><a href="https://github.com/VIlboys/VIlboys.github.io.git"><p>世界上另外一个小刘</p></a></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2019-09-17</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-01-17</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="recommend-area"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/css/share.min.css"><div class="social-share"></div><script src="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="https://raw.githubusercontent.com/removeif/blog_image/master/img/2019/20190802135456.png" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="https://raw.githubusercontent.com/removeif/blog_image/master/img/2019/20190802135550.png" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2019/09/23/Redis%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Redis的安装和基本使用</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2019/09/09/SprinBoot%E7%AE%80%E5%8D%95%E7%9A%84CRUD%E6%93%8D%E4%BD%9C/"><span class="level-item">SprinBoot简单的CRUD操作</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--><div class="card"><div class="card-content"><div class="title is-5">评论</div><div id="comment-container"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.6.0/gitalk.css"><script> $.getScript('/js/gitalk.min.js', function () { 
+            var gitalk = new Gitalk({
+            language:'zh-CN',
+            id: 'e36ce5a857e284a4a7ad05a921641d3e',
+            repo: 'blog-comment',
+            owner: 'VIlboys',
+            clientID: '608cd36235a2cde3f67d',
+            clientSecret: '08ea68efb9f8b8de495bc6b5ee0d2f9e5cc0f581',
+            admin: ["VIlboys"],
+            createIssueManually: true,
+            distractionFreeMode: false,
+            perPage: 10,
+            pagerDirection: 'last',
+            
+            
+            enableHotKey: true,
+            isLocked: false
+        })
+        gitalk.render('comment-container')});</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><!--!--><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://cdn.jsdelivr.net/gh/VIlboys/blog_img/icon_img/avatar.jpg" alt="世界上另外一个小刘"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">世界上另外一个小刘</p><p class="is-size-6 is-block">暂时没更新好的。</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>身份特殊被国家保护</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">48</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">20</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">6</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ppoffice" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/Vilboys"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://github.com/Vilboys"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:1399833047@qq.com"><i class="fa fa-envelope"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Next" href="https://Vilboys.github.io/remove.io"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div><div><hr><p id="hitokoto">:D 一言句子获取中...</p><script type="text/javascript" defer>function getYiyan(){
+                                $.getJSON("https://v1.hitokoto.cn/", function (data) {
+                                if(data){
+                                    $('#hitokoto').html("");
+                                    $('#hitokoto').append("<strong style='color: #3273dc;'>"+data.hitokoto+"</strong>"+
+                                    "<p>"+"来源《"+data.from+"》</p><p>提供者-"+data.creator+"</p>");
+                                }});}
+                                $(function (){getYiyan();$('#hitokoto').click(function(){getYiyan();})});</script></div></div></div><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><h3 class="menu-label">最新评论</h3><span class="body_hot_comment">加载中，最新评论有1分钟缓存...</span></div></div><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-01-17T10:25:11.313Z">2021-01-17</time></p><p class="title"><a href="/2021/01/17/SSM%E7%AE%80%E5%8D%95%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88%E5%AD%A6%E4%B9%A0/">SSM简单的整合学习</a></p><p class="categories"><a href="/categories/Spring/">Spring</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-01-17T10:25:11.282Z">2021-01-17</time></p><p class="title"><a href="/2021/01/17/Maven%E6%96%B0%E5%BB%BAWeb%E9%A1%B9%E7%9B%AE/">Maven新建Web项目</a></p><p class="categories"><a href="/categories/Maven/">Maven</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-12-27T15:08:00.000Z">2020-12-27</time></p><p class="title"><a href="/2020/12/27/%E6%88%90%E4%BA%BA%E6%97%A5%E8%AE%B0/">成人日记</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2020/12/06/%E4%BD%BF%E7%94%A8%E9%98%BF%E9%87%8C%E4%BA%91%E5%92%8C%E5%AE%9D%E5%A1%94%E6%90%AD%E5%BB%BAwordpress%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"><img src="https://cdn.jsdelivr.net/gh/VIlboys/blog_img/wordpress_img/获取wordpress.bmp" alt="使用阿里云和宝塔搭建wordpress个人博客"></a></figure><div class="media-content"><p class="date"><time dateTime="2020-12-06T03:03:01.000Z">2020-12-06</time></p><p class="title"><a href="/2020/12/06/%E4%BD%BF%E7%94%A8%E9%98%BF%E9%87%8C%E4%BA%91%E5%92%8C%E5%AE%9D%E5%A1%94%E6%90%AD%E5%BB%BAwordpress%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">使用阿里云和宝塔搭建wordpress个人博客</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2020/11/09/%E7%A7%8B%E5%A4%A9/"><img src="https://cdn.jsdelivr.net/gh/VIlboys/blog_img/reflection_img/那个秋天.jpg" alt="秋天"></a></figure><div class="media-content"><p class="date"><time dateTime="2020-11-09T13:28:18.000Z">2020-11-09</time></p><p class="title"><a href="/2020/11/09/%E7%A7%8B%E5%A4%A9/">秋天</a></p><p class="categories"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/categories/CentOS-Linux/"><span class="level-start"><span class="level-item">CentOS Linux</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Fiddler/"><span class="level-start"><span class="level-item">Fiddler</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/FreeMarker%E6%A8%A1%E6%9D%BF/"><span class="level-start"><span class="level-item">FreeMarker模板</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/JDBC/"><span class="level-start"><span class="level-item">JDBC</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/JDK/"><span class="level-start"><span class="level-item">JDK</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/JasperReport/"><span class="level-start"><span class="level-item">JasperReport</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Java/"><span class="level-start"><span class="level-item">Java</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Maven/"><span class="level-start"><span class="level-item">Maven</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/POI/"><span class="level-start"><span class="level-item">POI</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Redis/"><span class="level-start"><span class="level-item">Redis</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><a class="level is-mobile is-marginless" href="/categories/"><span class="level-start"><span class="level-item">查看全部&gt;&gt;</span></span></a></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/archives/2021/01/"><span class="level-start"><span class="level-item">一月 2021</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/12/"><span class="level-start"><span class="level-item">十二月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/11/"><span class="level-start"><span class="level-item">十一月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/07/"><span class="level-start"><span class="level-item">七月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/05/"><span class="level-start"><span class="level-item">五月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><a class="level is-mobile is-marginless" href="/archives/"><span class="level-start"><span class="level-item">查看全部&gt;&gt;</span></span></a></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/%E4%BF%9D%E6%8C%81%E5%A5%BD%E5%A5%87%E4%B8%8E%E5%AD%A6%E4%B9%A0/"><span class="tag">保持好奇与学习</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%81%9A%E4%BA%BA%E6%BD%87%E6%B4%92%E4%B8%80%E7%82%B9/"><span class="tag">做人潇洒一点</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AD%A6%E5%AD%A6/"><span class="tag">学学</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%98%AF%E4%B8%8D%E5%A4%AA%E5%8F%8B%E5%A5%BD%E7%9A%84%E4%B8%80%E5%A4%A9/"><span class="tag">是不太友好的一天</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%8E%8B%E4%BE%AF%E5%B0%86%E7%9B%B8-%E5%AE%81%E6%9C%89%E7%A7%8D%E4%B9%8E/"><span class="tag">王侯将相 宁有种乎!</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%A4%E7%9C%9F%E7%94%9F%E6%B4%BB%EF%BC%8C%E8%AE%A4%E7%9C%9F%E6%89%AF%E8%9B%8B/"><span class="tag">认真生活，认真扯蛋</span><span class="tag is-grey-lightest">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><!--!--><div class="column-right-shadow is-hidden-widescreen"></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="https://cdn.jsdelivr.net/gh/VIlboys/blog_img/icon_img/logo-s.png" alt="世界上另外一个小刘" height="28"></a><p class="size-small"><span>&copy; 2021 世界上另外一个小刘</span>  Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> &amp; <a href="https://github.com/removeif/hexo-theme-amazing" target="_blank">Amazing</a> <br><span>© <a href="http://www.beian.miit.gov.cn/" target="_blank">川ICP备88888888号-8（测试）</a><br></span><span>© 版权说明：[本网站所有内容均收集于互联网或自己创作,<br />&nbsp;&nbsp;&nbsp;&nbsp;方便于网友与自己学习交流，如有侵权，请<a href="/message" target="_blank">留言</a>，立即处理]<br /></span><span><span id="statistic-times">loading...</span><script>function createTime(time) {
+            var n = new Date(time);
+            now.setTime(now.getTime() + 250),
+                days = (now - n) / 1e3 / 60 / 60 / 24,
+                dnum = Math.floor(days),
+                hours = (now - n) / 1e3 / 60 / 60 - 24 * dnum,
+                hnum = Math.floor(hours),
+            1 == String(hnum).length && (hnum = "0" + hnum),
+                minutes = (now - n) / 1e3 / 60 - 1440 * dnum - 60 * hnum,
+                mnum = Math.floor(minutes),
+            1 == String(mnum).length && (mnum = "0" + mnum),
+                seconds = (now - n) / 1e3 - 86400 * dnum - 3600 * hnum - 60 * mnum,
+                snum = Math.round(seconds),
+            1 == String(snum).length && (snum = "0" + snum),
+                document.getElementById("statistic-times").innerHTML = "❤️本站自 <strong>"+time.split(" ")[0].replace(/\//g,".")+"</strong> 已运行 <strong>" + dnum + "</strong> 天 <strong>" + hnum + "</strong> 小时 <strong>" + mnum + "</strong> 分 <strong>" + snum + "</strong> 秒！❤️";
+        }var now = new Date();setInterval("createTime('2018/11/11 00:00:00')", 250,"");</script><br></span><div class="size-small"><span>❤️感谢 <strong><span id="busuanzi_value_site_uv">99+</span></strong> 小伙伴的 <strong><span id="busuanzi_value_site_pv">99+</span></strong> 次光临！❤️</span></div></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/removeif/hexo-theme-amazing"><i class="fab fa-github"></i></a></p></div><div class="sideMusic"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="/js/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script><meting-js style="width: auto;height: 2000px;" server="netease" type="playlist" id="545302946" theme="#2980b9" loop="all" autoplay="false" order="list" storageName="aplayer-setting" lrctype="0" list-max-height="400px" fixed="true"></meting-js></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script>$.getScript('/js/comment-issue-data.js',function(){loadIssueData('608cd36235a2cde3f67d','08ea68efb9f8b8de495bc6b5ee0d2f9e5cc0f581','VIlboys','blog-comment',false);})</script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script><script type="text/javascript">var pjax = new Pjax({
+            elements: "a",//代表点击链接就更新
+            selectors: [  //代表要更新的节点
+                ".section",
+                "title"
+            ],
+            cache: true,
+            cacheBust:false
+        })
+
+        function loadBusuanzi(){
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js", function () {});
+        }
+
+        // 开始 PJAX 执行的函数
+        document.addEventListener('pjax:send', function () {
+        });
+        
+        // PJAX 完成之后执行的函数，可以和上面的重载放在一起
+        document.addEventListener('pjax:complete', function () {
+            $(".section").css({opacity:1});
+            if(true){
+                $.getScript('/js/comment-issue-data.js',function(){loadIssueData('608cd36235a2cde3f67d','08ea68efb9f8b8de495bc6b5ee0d2f9e5cc0f581','VIlboys','blog-comment',false);});
+            }
+            if(false){
+                loadMathJax();
+            }
+            loadMainJs(jQuery, window.moment, window.ClipboardJS, window.IcarusThemeSettings);
+            loadBackTop();
+            loadBusuanzi();
+            if(typeof loadBanner == 'function'){
+                loadBanner();
+            }
+        });</script></body></html>
